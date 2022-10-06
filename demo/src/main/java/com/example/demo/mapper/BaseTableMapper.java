@@ -25,7 +25,7 @@ public interface BaseTableMapper extends BaseMapper<Map> {
             "<if test='ew.customSqlSegment == null or ew.customSqlSegment == \"\" and ew.paramNameValuePairs.eqTable != null and ew.paramNameValuePairs.eqTable != \"\"'>" +
             "where " +
             "</if>" +
-            "${ew.paramNameValuePairs.eqTable}" +
+            "${ew.paramNameValuePairs.eqTable} ${ew.paramNameValuePairs.by}" +
             "</script>")
     Map<String, Object> getObj(@Param("ew") BaseQueryWrapper queryWrapper);
 
@@ -36,7 +36,7 @@ public interface BaseTableMapper extends BaseMapper<Map> {
             "<if test='ew.customSqlSegment == null or ew.customSqlSegment == \"\" and ew.paramNameValuePairs.eqTable != null and ew.paramNameValuePairs.eqTable != \"\"'>" +
             "where " +
             "</if>" +
-            "${ew.paramNameValuePairs.eqTable}" +
+            "${ew.paramNameValuePairs.eqTable} ${ew.paramNameValuePairs.by}" +
             "</script>")
     List<Map<String, Object>> getObjList(@Param("ew") BaseQueryWrapper queryWrapper);
 }

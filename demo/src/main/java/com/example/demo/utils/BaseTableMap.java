@@ -14,31 +14,43 @@ import java.util.Map;
  */
 public class BaseTableMap extends HashMap<String, BaseTableInfo> {
 
-    public  StringBuilder               table  = new StringBuilder();
-    private Map<String, Object>         tClass = new HashMap<>();
+    public  StringBuilder       table       = new StringBuilder();
+    private Map<String, String> tableColumn = new HashMap<>();
+    private Map<String, String> tableMethod = new HashMap<>();
 
     public BaseTableMap(Class... classes) {
         super();
-        System.out.println("===================================");
         int i = 0;
         for (Class c : classes) {
             BaseTableInfo t = TableInfoHelper.initTableInfo(null, c);
             t.table = c;
             put(c.getSimpleName(), t);
-            tClass.put(t.getTableName(), c);
             i++;
             table.append(t.getTableName());
             if (i != classes.length) {
                 table.append(" , ");
             }
         }
+
+        setTableColumn();
+    }
+
+    private void setTableColumn() {
+        forEach((k, v) -> v.getSelectColumnMap().forEach((kk, vv) -> {
+            tableColumn.put(v.getTableName() + "." + kk, vv);
+            tableMethod.put(v.getTableName() + "." + kk, TableClass.getMethodName(kk));
+        }));
+    }
+
+    public String getTableColumn(String column) {
+        return tableColumn.get(column);
     }
 
     public String getTable() {
         return table.toString();
     }
 
-    public String getSelectSql() {
+    String getSelectSql() {
         final int[]   i = {0};
         StringBuilder s = new StringBuilder();
         forEach((k, v) -> {
@@ -66,7 +78,7 @@ public class BaseTableMap extends HashMap<String, BaseTableInfo> {
     }
 
     void getVal(String key, Object val, Map<Class, Object> o) {
-        forEach((k,v)->{
+        forEach((k, v) -> {
             try {
                 if (v.getResultColumnMap().containsKey(key)) {
                     String m = v.getResultColumnMap().get(key);
@@ -80,5 +92,27 @@ public class BaseTableMap extends HashMap<String, BaseTableInfo> {
                 e.printStackTrace();
             }
         });
+    }
+
+    void getUpdateObj(Map<Class, Object> m) {
+        StringBuilder sql = new StringBuilder();
+        forEach((k,v)-> {
+            v.getFieldList().forEach(vv-> {
+                try {
+                    Object val = m.get(v.table).getClass().getMethod("get"+tableMethod.get(v.getTableName()+"."+vv.getColumn())).invoke(m.get(v.table));
+                    sql.append(v.getTableColumn("get"+vv.getColumn())).append("=");
+                    if (val instanceof Integer || val instanceof Double || val instanceof Long || val instanceof Float) {
+                        sql.append(val);
+                    } else {
+                        sql.append("'").append(val).append("'");
+                    }
+                    sql.append(" ");
+
+                } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+                    e.printStackTrace();
+                }
+            });
+        });
+        System.out.println(sql.toString());
     }
 }

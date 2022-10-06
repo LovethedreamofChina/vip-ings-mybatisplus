@@ -21,7 +21,7 @@ public class BaseTableInfo extends TableInfo {
     public  Class               table;
     private Map<String, String> noField = new HashMap<>();
     private Map<String, String> resultColumnMap;
-    private Map<String, String> slectColumnMap;
+    private Map<String, String> selectColumnMap;
     private Map<String, Class>  resultColumnType;
 
     public Map<String, String> getResultColumnMap() {
@@ -30,17 +30,22 @@ public class BaseTableInfo extends TableInfo {
 
     public void setResultColumnMap() {
         resultColumnMap = new HashMap<>();
-        slectColumnMap = new HashMap<>();
+        selectColumnMap = new HashMap<>();
         resultColumnType = new HashMap<>();
         getFieldList().forEach(v -> {
             resultColumnMap.put(tableClass + "$" + v.getColumn(), "set" + TableClass.getMethodName(v.getColumn()));
-            slectColumnMap.put(v.getColumn(), getTableName() + "." + v.getColumn() + " as " + tableClass + "$" + v.getColumn());
+            selectColumnMap.put(v.getColumn(), getTableName() + "." + v.getColumn() + " as " + tableClass + "$" + v.getColumn());
             resultColumnType.put(tableClass + "$" + v.getColumn(), v.getPropertyType());
         });
         if (StringUtils.isNotEmpty(getKeySqlSelect())) {
             resultColumnMap.put(tableClass + "$" + getKeyColumn(), "set" + TableClass.getMethodName(getKeyColumn()));
             resultColumnType.put(tableClass + "$" + getKeyColumn(), int.class);
+            selectColumnMap.put(getKeyColumn(), getTableName() + "." + getKeyColumn() + " as " + tableClass + "$" + getKeyColumn());
         }
+    }
+
+    public Map<String, String> getSelectColumnMap() {
+        return selectColumnMap;
     }
 
     public void setKeyType(Class keyType) {
@@ -60,11 +65,16 @@ public class BaseTableInfo extends TableInfo {
     }
 
     @Override
+    public String getAllSqlSelect() {
+        return super.getAllSqlSelect();
+    }
+
+    @Override
     public String chooseSelect(Predicate<TableFieldInfo> predicate) {
         String sqlSelect = this.getKeySqlSelect();
         sqlSelect = noField.containsKey("get" + sqlSelect) ? null : sqlSelect;
         List<TableFieldInfo> fieldList = getFieldList();
-        String               select    = fieldList.stream().filter(v -> !this.noField.containsKey("get" + v.getColumn())).map(v -> slectColumnMap.get(v.getColumn())).collect(Collectors.joining(","));
+        String               select    = fieldList.stream().filter(v -> !this.noField.containsKey("get" + v.getColumn())).map(v -> selectColumnMap.get(v.getColumn())).collect(Collectors.joining(" ,"));
         if (StringUtils.isNotEmpty(sqlSelect) && StringUtils.isNotEmpty(select)) {
             return getTableName() + '.' + sqlSelect + " as " + tableClass + "$" + sqlSelect
                     + " , " +

@@ -9,7 +9,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.annotation.Resource;
-import java.util.List;
 import java.util.Map;
 
 @SpringBootTest
@@ -18,13 +17,14 @@ class DemoApplicationTests {
     @Test
     void contextLoads() {
         BaseQueryWrapper<BaseTableMap> queryWrapper = new BaseQueryWrapper<BaseTableMap>(baseTableMapper, TablesMapper::getTableMap);
-        queryWrapper.joinTable(TestLabel::getId);
-        queryWrapper.joinTable(TestTable::getId);
-        List<Map<Class, Object>> obj = queryWrapper.runSqlAll();
-        System.out.println(obj.get(0));
+//        queryWrapper.joinTable(TestLabel::getId).joinTable(TestTable::getId);
+        queryWrapper.addNoColumn(TestLabel::getId).addNoColumn(TestTable::getName).limit(1);
+        Map<Class, Object> obj = queryWrapper.runSql();
+        System.out.println(obj.get(TestTable.class));
+        queryWrapper.runUpdate(obj);
+
     }
 
     @Resource
     private BaseTableMapper baseTableMapper;
 }
-

@@ -1,6 +1,5 @@
 package com.example.demo.table;
 
-import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.Data;
 
 /**

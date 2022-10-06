@@ -17,5 +17,7 @@ public class TestLabel {
         @TableField(exist = false)
     private String label;
 
-    public static int A(){return 0;};
+    public static int A() {
+        return 0;
+    }
 }
