@@ -6,6 +6,7 @@ import com.example.demo.utils.BaseQueryWrapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
 import java.util.Map;
@@ -36,7 +37,22 @@ public interface BaseTableMapper extends BaseMapper<Map> {
             "<if test='ew.customSqlSegment == null or ew.customSqlSegment == \"\" and ew.paramNameValuePairs.eqTable != null and ew.paramNameValuePairs.eqTable != \"\"'>" +
             "where " +
             "</if>" +
+            "<if test='ew.customSqlSegment != null and ew.customSqlSegment != \"\"'>" +
+            "and " +
+            "</if>" +
             "${ew.paramNameValuePairs.eqTable} ${ew.paramNameValuePairs.by}" +
             "</script>")
     List<Map<String, Object>> getObjList(@Param("ew") BaseQueryWrapper queryWrapper);
+
+    @Update("<script>" +
+            "update ${ew.paramNameValuePairs.table} set ${ew.paramNameValuePairs.cr} ${ew.customSqlSegment}" +
+            "<if test='ew.customSqlSegment == null or ew.customSqlSegment == \"\" and ew.paramNameValuePairs.eqTable != null and ew.paramNameValuePairs.eqTable != \"\"'>" +
+            "where " +
+            "</if>" +
+            "<if test='ew.customSqlSegment != null and ew.customSqlSegment != \"\"'>" +
+            "and " +
+            "</if>" +
+            " ${ew.paramNameValuePairs.eqTable}" +
+            "</script>")
+    int getUpdateObj(@Param("ew") BaseQueryWrapper queryWrapper);
 }

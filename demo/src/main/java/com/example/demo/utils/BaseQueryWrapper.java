@@ -18,16 +18,18 @@ import java.util.function.Predicate;
  * @date 2022-09-27 16:29
  */
 public class BaseQueryWrapper<T> extends QueryWrapper<T> {
-    private BaseTableMap    baseTableMap;
-    private BaseTableMapper mapper;
-    private List<String>    noColumn = new LinkedList<>();
+    private       BaseTableMap    baseTableMap;
+    private       BaseTableMapper mapper;
+    private       List<String>    noColumn = new LinkedList<>();
+    public static int             ASC      = 1;
+    public static int             DESC     = 1;
 
     public <T, R> BaseQueryWrapper(BaseTableMapper mapper, SFunction<T, R> func) {
         this.mapper = mapper;
         this.baseTableMap = getMap(func);
     }
 
-    public <T,R> BaseQueryWrapper<T> joinTable(SFunction<T, R> column) {
+    public <T, R> BaseQueryWrapper<T> joinTable(SFunction<T, R> column) {
         if (!getParamNameValuePairs().containsKey("eqTable")) {
             getParamNameValuePairs().put("eqTable", " " + baseTableMap.getTableColumnSql(column));
         } else {
@@ -41,7 +43,7 @@ public class BaseQueryWrapper<T> extends QueryWrapper<T> {
     }
 
     public <T, R> BaseQueryWrapper<T> gt(SFunction<T, R> column, Object val) {
-        return  (BaseQueryWrapper<T>)  super.gt(baseTableMap.getTableColumnSql(column), val);
+        return (BaseQueryWrapper<T>) super.gt(baseTableMap.getTableColumnSql(column), val);
     }
 
     public <T, R> BaseQueryWrapper<T> ge(SFunction<T, R> column, Object val) {
@@ -76,11 +78,15 @@ public class BaseQueryWrapper<T> extends QueryWrapper<T> {
         return (BaseQueryWrapper<T>) super.notBetween(baseTableMap.getTableColumnSql(column), val, val1);
     }
 
+    public <T, R> BaseQueryWrapper<T> orderBy(SFunction<T, R> column, int by) {
+        orderByDesc();
+        return (BaseQueryWrapper<T>) this;
+    }
+
     public Map<Class, Object> runSql() {
         getRc();
         getParamNameValuePairs().put("table", baseTableMap.getTable());
 
-        System.out.println(getParamNameValuePairs().toString());
         Map<Class, Object>  map    = new HashMap<>();
         Map<String, Object> result = mapper.getObj(this);
         if (result == null) {
@@ -105,7 +111,8 @@ public class BaseQueryWrapper<T> extends QueryWrapper<T> {
             i.forEach((k, v) -> {
                 baseTableMap.getVal(k, v, map);
                 list.add(map);
-            });});
+            });
+        });
         return list;
     }
 
@@ -131,7 +138,7 @@ public class BaseQueryWrapper<T> extends QueryWrapper<T> {
         return super.select(predicate);
     }
 
-    private <T,R> BaseTableMap getMap(SFunction<T, R> func)  {
+    private <T, R> BaseTableMap getMap(SFunction<T, R> func) {
         SerializedLambda s = LambdaUtils.resolve(func);
         s.getImplMethodName();
         try {
@@ -152,26 +159,26 @@ public class BaseQueryWrapper<T> extends QueryWrapper<T> {
 
     @SafeVarargs
     public final <T, R> BaseQueryWrapper<T> addNoColumn(SFunction<T, R>... fun) {
-        for (SFunction<T,R> s:fun) {
+        for (SFunction<T, R> s : fun) {
             noColumn.add(baseTableMap.getTableColumn(baseTableMap.getTableColumnSql(s)));
         }
         return (BaseQueryWrapper<T>) this;
     }
 
-    private void getRc(){
+    private void getRc() {
         String selectSql = getSqlSelect();
         if (StringUtils.isEmpty(selectSql)) {
             selectSql = baseTableMap.getSelectSql();
         }
 
-        for (String ls:noColumn) {
-            selectSql = selectSql.replace(ls+" ,", "");
+        for (String ls : noColumn) {
+            selectSql = selectSql.replace(ls + " ,", "");
         }
 
         getParamNameValuePairs().put("cr", selectSql);
     }
 
-    public BaseQueryWrapper<T> limit(int count){
+    public BaseQueryWrapper<T> limit(int count) {
         if (!getParamNameValuePairs().containsKey("by")) {
             getParamNameValuePairs().put("by", " limit " + count);
         } else {
@@ -180,7 +187,10 @@ public class BaseQueryWrapper<T> extends QueryWrapper<T> {
         return this;
     }
 
-    public void runUpdate(Map<Class, Object> m){
-        baseTableMap.getUpdateObj(m);
+    public void runUpdate(Map<Class, Object> m) {
+        getParamNameValuePairs().put("table", baseTableMap.getTable());
+        getParamNameValuePairs().put("cr", baseTableMap.getUpdateObj(m));
+        int result = mapper.getUpdateObj(this);
+        System.out.println(result);
     }
 }

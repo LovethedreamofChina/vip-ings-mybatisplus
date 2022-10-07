@@ -6,6 +6,8 @@ import com.baomidou.mybatisplus.core.toolkit.support.SerializedLambda;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -94,25 +96,23 @@ public class BaseTableMap extends HashMap<String, BaseTableInfo> {
         });
     }
 
-    void getUpdateObj(Map<Class, Object> m) {
-        StringBuilder sql = new StringBuilder();
-        forEach((k,v)-> {
-            v.getFieldList().forEach(vv-> {
-                try {
-                    Object val = m.get(v.table).getClass().getMethod("get"+tableMethod.get(v.getTableName()+"."+vv.getColumn())).invoke(m.get(v.table));
-                    sql.append(v.getTableColumn("get"+vv.getColumn())).append("=");
-                    if (val instanceof Integer || val instanceof Double || val instanceof Long || val instanceof Float) {
-                        sql.append(val);
-                    } else {
-                        sql.append("'").append(val).append("'");
-                    }
-                    sql.append(" ");
-
-                } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
-                    e.printStackTrace();
+    String getUpdateObj(Map<Class, Object> m) {
+        List<String> s = new LinkedList<>();
+        forEach((k, v) -> v.getFieldList().forEach(vv -> {
+            try {
+                Object val = m.get(v.table).getClass().getMethod("get" + tableMethod.get(v.getTableName() + "." + vv.getColumn())).invoke(m.get(v.table));
+                String i   = v.getTableColumn("get" + vv.getColumn()) + "=";
+                if (val instanceof Integer || val instanceof Double || val instanceof Long || val instanceof Float || val == null) {
+                    i += val;
+                } else {
+                    i += "'" + val + "'";
                 }
-            });
-        });
-        System.out.println(sql.toString());
+                i += " ";
+                s.add(i);
+            } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+                e.printStackTrace();
+            }
+        }));
+        return String.join(" , ", s);
     }
 }
