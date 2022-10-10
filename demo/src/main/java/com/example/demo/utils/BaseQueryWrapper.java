@@ -6,7 +6,6 @@ import com.baomidou.mybatisplus.core.toolkit.LambdaUtils;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.core.toolkit.support.SFunction;
 import com.baomidou.mybatisplus.core.toolkit.support.SerializedLambda;
-import com.example.demo.TablesMapper;
 import com.example.demo.mapper.BaseTableMapper;
 
 import java.lang.reflect.InvocationTargetException;
@@ -18,11 +17,11 @@ import java.util.function.Predicate;
  * @date 2022-09-27 16:29
  */
 public class BaseQueryWrapper<T> extends QueryWrapper<T> {
-    private       BaseTableMap    baseTableMap;
-    private       BaseTableMapper mapper;
-    private       List<String>    noColumn = new LinkedList<>();
-    public static int             ASC      = 1;
-    public static int             DESC     = 1;
+    private       BaseTableMap baseTableMap;
+    private       BaseTableMapper                 mapper;
+    private       List<String>                    noColumn = new LinkedList<>();
+    public static int                             ASC      = 1;
+    public static int                             DESC     = 1;
 
     public <T, R> BaseQueryWrapper(BaseTableMapper mapper, SFunction<T, R> func) {
         this.mapper = mapper;
@@ -142,8 +141,9 @@ public class BaseQueryWrapper<T> extends QueryWrapper<T> {
         SerializedLambda s = LambdaUtils.resolve(func);
         s.getImplMethodName();
         try {
-            return (BaseTableMap) TablesMapper.class.getMethod(s.getImplMethodName()).invoke(BaseTableMapper.t);
+            return (BaseTableMap) ((Class) BaseTableMapper.t.get("tClass")).getMethod(s.getImplMethodName()).invoke(BaseTableMapper.t.get("tables"));
         } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+            e.printStackTrace();
             throw new RuntimeException("出错");
         }
     }

@@ -1,6 +1,6 @@
 package com.example.demo;
 
-import com.example.demo.mapper.BaseTableMapper;
+import com.example.demo.mapper.TableMapper;
 import com.example.demo.table.TestLabel;
 import com.example.demo.table.TestTable;
 import com.example.demo.utils.BaseQueryWrapper;
@@ -45,5 +45,5 @@ class DemoApplicationTests {
     }
 
     @Resource
-    private BaseTableMapper baseTableMapper;
+    private TableMapper baseTableMapper;
 }

@@ -1,13 +1,12 @@
 package com.example.demo.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.example.demo.TablesMapper;
 import com.example.demo.utils.BaseQueryWrapper;
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -15,10 +14,23 @@ import java.util.Map;
  * @author ljr
  * @date 2022-09-27 15:52
  */
-@Mapper
-public interface BaseTableMapper extends BaseMapper<Map> {
+public interface BaseTableMapper<T> extends BaseMapper<T> {
 
-    TablesMapper t = new TablesMapper();
+    Map<String, Object> t = new HashMap<>();
+
+    static Object getT(Class c) {
+        Object o = null;
+
+        try {
+            o = c.newInstance();
+        } catch (IllegalAccessException | InstantiationException var3) {
+            var3.printStackTrace();
+        }
+
+        t.put("tClass", c);
+        t.put("tables", o);
+        return o;
+    }
 
     @Select("<script>" +
             "select ${ew.paramNameValuePairs.cr} from ${ew.paramNameValuePairs.table} " +
