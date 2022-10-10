@@ -1,4 +1,4 @@
-package com.example.demo.utils;
+package www.ings.vip.utils;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.TableFieldInfo;
@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.core.toolkit.LambdaUtils;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.core.toolkit.support.SFunction;
 import com.baomidou.mybatisplus.core.toolkit.support.SerializedLambda;
-import com.example.demo.mapper.BaseTableMapper;
+import www.ings.vip.mapper.BaseTableMapper;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;

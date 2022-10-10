@@ -1,10 +1,10 @@
-package com.example.demo;
+package www.ings.vip;
 
-import com.example.demo.mapper.TableMapper;
-import com.example.demo.table.TestLabel;
-import com.example.demo.table.TestTable;
-import com.example.demo.utils.BaseQueryWrapper;
-import com.example.demo.utils.BaseTableMap;
+import www.ings.vip.mapper.TableMapper;
+import www.ings.vip.table.TestLabel;
+import www.ings.vip.table.TestTable;
+import www.ings.vip.utils.BaseQueryWrapper;
+import www.ings.vip.utils.BaseTableMap;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 

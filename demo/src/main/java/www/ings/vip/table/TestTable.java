@@ -1,4 +1,4 @@
-package com.example.demo.table;
+package www.ings.vip.table;
 
 import lombok.Data;
 

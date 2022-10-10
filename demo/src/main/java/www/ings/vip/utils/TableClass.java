@@ -1,6 +1,6 @@
-package com.example.demo.utils;
+package www.ings.vip.utils;
 
-import com.example.demo.table.Table;
+import www.ings.vip.table.Table;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;

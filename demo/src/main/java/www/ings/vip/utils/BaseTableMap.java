@@ -1,4 +1,4 @@
-package com.example.demo.utils;
+package www.ings.vip.utils;
 
 import com.baomidou.mybatisplus.core.toolkit.LambdaUtils;
 import com.baomidou.mybatisplus.core.toolkit.support.SFunction;

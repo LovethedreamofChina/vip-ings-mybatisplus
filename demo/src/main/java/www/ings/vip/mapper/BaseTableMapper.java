@@ -1,7 +1,7 @@
-package com.example.demo.mapper;
+package www.ings.vip.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.example.demo.utils.BaseQueryWrapper;
+import www.ings.vip.utils.BaseQueryWrapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;

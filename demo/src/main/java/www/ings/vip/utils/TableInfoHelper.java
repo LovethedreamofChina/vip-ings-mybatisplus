@@ -1,4 +1,4 @@
-package com.example.demo.utils;
+package www.ings.vip.utils;
 
 //
 // Source code recreated from a .class file by IntelliJ IDEA

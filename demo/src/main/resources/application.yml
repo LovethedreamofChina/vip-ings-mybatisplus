@@ -14,12 +14,6 @@ spring:
       repositories:
         enabled: false
 
-  redis:
-    host: 127.0.0.1
-    port: 6379
-    password: 123456789
-    database: 5
-
 # 应用服务 WEB 访问端口
 server:
   port: 8802

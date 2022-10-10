@@ -1,4 +1,4 @@
-package com.example.demo;
+package www.ings.vip;
 
 import lombok.Data;
 
