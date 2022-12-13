@@ -171,11 +171,10 @@ public class BaseQueryWrapper<T> extends QueryWrapper<T> {
      *
      * @param m
      */
-    public void runUpdate(Map<Class, Object> m) {
+    public int runUpdate(Map<Class, Object> m) {
         getParamNameValuePairs().put("table", baseTableMap.getTable());
         getParamNameValuePairs().put("cr", baseTableMap.getUpdateObj(m));
-        int result = mapper.updates(this);
-        System.out.println(result);
+        return mapper.updates(this);
     }
 
     /**

@@ -23,10 +23,6 @@ mybatis-plus:
     map-underscore-to-camel-case: true
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
-# 日志
-logging:
-  config: classpath:logback-spring.xml
-
 outagedetection: true
 # 慢SQL记录标准 2 秒
 outagedetectioninterval: 2

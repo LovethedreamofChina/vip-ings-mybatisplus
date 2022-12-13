@@ -90,7 +90,8 @@ public class BaseTableMap extends HashMap<String, BaseTableInfo> {
                     }
                     v.table.getMethod(m, v.getResultColumnType().get(key)).invoke(o.get(v.table), val);
                 }
-            } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
+            } catch (InstantiationException | IllegalAccessException | NoSuchMethodException |
+                     InvocationTargetException e) {
                 e.printStackTrace();
             }
         });

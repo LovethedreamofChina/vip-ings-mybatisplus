@@ -13,8 +13,8 @@ import lombok.Data;
 public class TestLabel {
     private int id;
     private String name;
-//    private String age;
-        @TableField(exist = false)
+
+   @TableField(exist = false)
     private String label;
 
     public static int A() {
