@@ -1,15 +1,17 @@
-package www.ings.vip;
+package ings.vip.mybaitsplus;
 
-import www.ings.vip.mapper.TableMapper;
-import www.ings.vip.table.TestLabel;
-import www.ings.vip.table.TestTable;
-import www.ings.vip.utils.BaseQueryWrapper;
-import www.ings.vip.utils.BaseTableMap;
+import ings.vip.mybaitsplus.mapper.TableMapper;
+import ings.vip.mybaitsplus.utils.BaseQueryWrapper;
+import ings.vip.mybaitsplus.utils.BaseTableMap;
+import ings.vip.mybaitsplus.table.TestLabel;
+import ings.vip.mybaitsplus.table.TestTable;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.util.ObjectUtils;
 
 import javax.annotation.Resource;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @SpringBootTest
@@ -22,15 +24,24 @@ class DemoApplicationTests {
         queryWrapper.myAddNoColumn(TestLabel::getId).myAddNoColumn(TestTable::getName).myLimit(1);
         queryWrapper.orderByAsc("test_table.id");
         Map<Class, Object> obj = queryWrapper.runSql();
+        if (ObjectUtils.isEmpty(obj)) {
+            return;
+        }
         System.out.println(obj.get(TestTable.class));
+
+        List<Map<Class, Object>> listObj = queryWrapper.runSqlAll();
+        if (ObjectUtils.isEmpty(obj)) {
+            return;
+        }
+        System.out.println(listObj);
     }
 
     @Test
-    void contextLoadsOnt() {
+    void runUpdate() {
         BaseQueryWrapper<BaseTableMap> queryWrapper = new BaseQueryWrapper<BaseTableMap>(baseTableMapper, TablesMapper::getTableMap);
         Map<Class, Object> m = new HashMap<>();
         TestLabel testLabel = new TestLabel();
-        testLabel.setLabel("11111");
+        testLabel.setLabel("test");
         testLabel.setName("name");
         TestTable testTable = new TestTable();
         testTable.setName("name1");
@@ -43,7 +54,7 @@ class DemoApplicationTests {
     }
 
     @Test
-    void contextLoadsOnts() {
+    void runDelete() {
         BaseQueryWrapper<BaseTableMap> queryWrapper = new BaseQueryWrapper<BaseTableMap>(baseTableMapper, TablesMapper::getTableMap);
         queryWrapper.myEq(TestLabel::getId, 1);
         queryWrapper.joinTable(TestTable::getId).joinTable(TestLabel::getId);

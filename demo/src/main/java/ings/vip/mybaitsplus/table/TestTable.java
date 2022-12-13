@@ -1,4 +1,4 @@
-package www.ings.vip.table;
+package ings.vip.mybaitsplus.table;
 
 import lombok.Data;
 

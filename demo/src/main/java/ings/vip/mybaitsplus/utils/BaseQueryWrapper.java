@@ -1,4 +1,4 @@
-package www.ings.vip.utils;
+package ings.vip.mybaitsplus.utils;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.TableFieldInfo;
@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.core.toolkit.LambdaUtils;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.core.toolkit.support.SFunction;
 import com.baomidou.mybatisplus.core.toolkit.support.SerializedLambda;
-import www.ings.vip.mapper.BaseTableMapper;
+import ings.vip.mybaitsplus.mapper.BaseTableMapper;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
@@ -78,39 +78,6 @@ public class BaseQueryWrapper<T> extends QueryWrapper<T> {
     public <T, R> BaseQueryWrapper<T> myOrderBy(SFunction<T, R> column, int by) {
         orderByDesc();
         return (BaseQueryWrapper<T>) this;
-    }
-
-    public Map<Class, Object> runSql() {
-        getRc();
-        getParamNameValuePairs().put("table", baseTableMap.getTable());
-
-        Map<Class, Object>  map    = new HashMap<>();
-        Map<String, Object> result = mapper.getObjs(this);
-        if (result == null) {
-            return null;
-        }
-        result.forEach((k, v) -> baseTableMap.getVal(k, v, map));
-        return map;
-    }
-
-    public List<Map<Class, Object>> runSqlAll() {
-        getRc();
-        getParamNameValuePairs().put("table", baseTableMap.getTable());
-
-        List<Map<Class, Object>>  list   = new ArrayList<>();
-        List<Map<String, Object>> result = mapper.getObjLists(this);
-        if (result == null) {
-            return null;
-        }
-
-        result.forEach(i -> {
-            Map<Class, Object> map = new HashMap<>();
-            i.forEach((k, v) -> {
-                baseTableMap.getVal(k, v, map);
-                list.add(map);
-            });
-        });
-        return list;
     }
 
     public QueryWrapper<T> mySelect(Predicate<TableFieldInfo> predicate) {
@@ -206,4 +173,48 @@ public class BaseQueryWrapper<T> extends QueryWrapper<T> {
         getParamNameValuePairs().put("table", baseTableMap.getTable());
         return mapper.getObjLists(this);
     }
+
+    /**
+     * 查询
+     *
+     * @return
+     */
+    public Map<Class, Object> runSql() {
+        getRc();
+        getParamNameValuePairs().put("table", baseTableMap.getTable());
+
+        Map<Class, Object>  map    = new HashMap<>();
+        Map<String, Object> result = mapper.getObjs(this);
+        if (result == null) {
+            return null;
+        }
+        result.forEach((k, v) -> baseTableMap.getVal(k, v, map));
+        return map;
+    }
+
+    /**
+     * 查询
+     *
+     * @return
+     */
+    public List<Map<Class, Object>> runSqlAll() {
+        getRc();
+        getParamNameValuePairs().put("table", baseTableMap.getTable());
+
+        List<Map<Class, Object>>  list   = new ArrayList<>();
+        List<Map<String, Object>> result = mapper.getObjLists(this);
+        if (result == null) {
+            return null;
+        }
+
+        result.forEach(i -> {
+            Map<Class, Object> map = new HashMap<>();
+            i.forEach((k, v) -> {
+                baseTableMap.getVal(k, v, map);
+                list.add(map);
+            });
+        });
+        return list;
+    }
+
 }

@@ -1,4 +1,4 @@
-package www.ings.vip.utils;
+package ings.vip.mybaitsplus.utils;
 
 /**
  * @author ljr

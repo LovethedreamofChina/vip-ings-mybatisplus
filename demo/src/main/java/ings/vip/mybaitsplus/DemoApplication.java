@@ -1,10 +1,10 @@
-package www.ings.vip;
+package ings.vip.mybaitsplus;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
-@ComponentScan("www.ings.vip.*")
+@ComponentScan("ings.vip.mybaitsplus.*")
 @SpringBootApplication
 public class DemoApplication {
 
