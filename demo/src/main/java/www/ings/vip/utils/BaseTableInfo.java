@@ -33,12 +33,12 @@ public class BaseTableInfo extends TableInfo {
         selectColumnMap = new HashMap<>();
         resultColumnType = new HashMap<>();
         getFieldList().forEach(v -> {
-            resultColumnMap.put(tableClass + "$" + v.getColumn(), "set" + TableClass.getMethodName(v.getColumn()));
+            resultColumnMap.put(tableClass + "$" + v.getColumn(), "set" + TableClassUtils.getMethodName(v.getColumn()));
             selectColumnMap.put(v.getColumn(), getTableName() + "." + v.getColumn() + " as " + tableClass + "$" + v.getColumn());
             resultColumnType.put(tableClass + "$" + v.getColumn(), v.getPropertyType());
         });
         if (StringUtils.isNotEmpty(getKeySqlSelect())) {
-            resultColumnMap.put(tableClass + "$" + getKeyColumn(), "set" + TableClass.getMethodName(getKeyColumn()));
+            resultColumnMap.put(tableClass + "$" + getKeyColumn(), "set" + TableClassUtils.getMethodName(getKeyColumn()));
             resultColumnType.put(tableClass + "$" + getKeyColumn(), int.class);
             selectColumnMap.put(getKeyColumn(), getTableName() + "." + getKeyColumn() + " as " + tableClass + "$" + getKeyColumn());
         }

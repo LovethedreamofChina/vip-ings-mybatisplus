@@ -1,6 +1,7 @@
 package www.ings.vip.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Delete;
 import www.ings.vip.utils.BaseQueryWrapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -40,7 +41,7 @@ public interface BaseTableMapper<T> extends BaseMapper<T> {
             "</if>" +
             "${ew.paramNameValuePairs.eqTable} ${ew.paramNameValuePairs.by}" +
             "</script>")
-    Map<String, Object> getObj(@Param("ew") BaseQueryWrapper queryWrapper);
+    Map<String, Object> getObjs(@Param("ew") BaseQueryWrapper queryWrapper);
 
 
     @Select("<script>" +
@@ -54,7 +55,7 @@ public interface BaseTableMapper<T> extends BaseMapper<T> {
             "</if>" +
             "${ew.paramNameValuePairs.eqTable} ${ew.paramNameValuePairs.by}" +
             "</script>")
-    List<Map<String, Object>> getObjList(@Param("ew") BaseQueryWrapper queryWrapper);
+    List<Map<String, Object>> getObjLists(@Param("ew") BaseQueryWrapper queryWrapper);
 
     @Update("<script>" +
             "update ${ew.paramNameValuePairs.table} set ${ew.paramNameValuePairs.cr} ${ew.customSqlSegment}" +
@@ -66,5 +67,17 @@ public interface BaseTableMapper<T> extends BaseMapper<T> {
             "</if>" +
             " ${ew.paramNameValuePairs.eqTable}" +
             "</script>")
-    int getUpdateObj(@Param("ew") BaseQueryWrapper queryWrapper);
+    int updates(@Param("ew") BaseQueryWrapper queryWrapper);
+
+    @Delete("<script>" +
+            "delete ${ew.paramNameValuePairs.table} from ${ew.paramNameValuePairs.table} ${ew.customSqlSegment}" +
+            "<if test='ew.customSqlSegment == null or ew.customSqlSegment == \"\" and ew.paramNameValuePairs.eqTable != null and ew.paramNameValuePairs.eqTable != \"\"'>" +
+            "where " +
+            "</if>" +
+            "<if test='ew.customSqlSegment != null and ew.customSqlSegment != \"\"'>" +
+            "and " +
+            "</if>" +
+            " ${ew.paramNameValuePairs.eqTable}" +
+            "</script>")
+    int deletes(@Param("ew") BaseQueryWrapper queryWrapper);
 }

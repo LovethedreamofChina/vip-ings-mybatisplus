@@ -19,12 +19,10 @@ class DemoApplicationTests {
     void contextLoads() {
         BaseQueryWrapper<BaseTableMap> queryWrapper = new BaseQueryWrapper<BaseTableMap>(baseTableMapper, TablesMapper::getTableMap);
 //        queryWrapper.joinTable(TestLabel::getId).joinTable(TestTable::getId);
-        queryWrapper.addNoColumn(TestLabel::getId).addNoColumn(TestTable::getName).limit(1);
+        queryWrapper.myAddNoColumn(TestLabel::getId).myAddNoColumn(TestTable::getName).myLimit(1);
         queryWrapper.orderByAsc("test_table.id");
         Map<Class, Object> obj = queryWrapper.runSql();
         System.out.println(obj.get(TestTable.class));
-
-//        queryWrapper.runUpdate(obj);
     }
 
     @Test
@@ -39,9 +37,18 @@ class DemoApplicationTests {
         testTable.setAge("110");
         m.put(TestTable.class, testTable);
         m.put(TestLabel.class, testLabel);
-        queryWrapper.eq(TestLabel::getId, 2);
+        queryWrapper.myEq(TestLabel::getId, 2);
         queryWrapper.joinTable(TestTable::getId).joinTable(TestLabel::getId);
         queryWrapper.runUpdate(m);
+    }
+
+    @Test
+    void contextLoadsOnts() {
+        BaseQueryWrapper<BaseTableMap> queryWrapper = new BaseQueryWrapper<BaseTableMap>(baseTableMapper, TablesMapper::getTableMap);
+        queryWrapper.myEq(TestLabel::getId, 1);
+        queryWrapper.joinTable(TestTable::getId).joinTable(TestLabel::getId);
+        int res = queryWrapper.runDelete();
+        System.out.println(res);
     }
 
     @Resource

@@ -17,11 +17,9 @@ import java.util.function.Predicate;
  * @date 2022-09-27 16:29
  */
 public class BaseQueryWrapper<T> extends QueryWrapper<T> {
-    private       BaseTableMap baseTableMap;
-    private       BaseTableMapper                 mapper;
-    private       List<String>                    noColumn = new LinkedList<>();
-    public static int                             ASC      = 1;
-    public static int                             DESC     = 1;
+    private BaseTableMap    baseTableMap;
+    private BaseTableMapper mapper;
+    private List<String>    noColumn = new LinkedList<>();
 
     public <T, R> BaseQueryWrapper(BaseTableMapper mapper, SFunction<T, R> func) {
         this.mapper = mapper;
@@ -37,47 +35,47 @@ public class BaseQueryWrapper<T> extends QueryWrapper<T> {
         return (BaseQueryWrapper<T>) this;
     }
 
-    public <T, R> BaseQueryWrapper<T> eq(SFunction<T, R> column, Object val) {
+    public <T, R> BaseQueryWrapper<T> myEq(SFunction<T, R> column, Object val) {
         return (BaseQueryWrapper<T>) super.eq(baseTableMap.getTableColumnSql(column), val);
     }
 
-    public <T, R> BaseQueryWrapper<T> gt(SFunction<T, R> column, Object val) {
+    public <T, R> BaseQueryWrapper<T> myGt(SFunction<T, R> column, Object val) {
         return (BaseQueryWrapper<T>) super.gt(baseTableMap.getTableColumnSql(column), val);
     }
 
-    public <T, R> BaseQueryWrapper<T> ge(SFunction<T, R> column, Object val) {
+    public <T, R> BaseQueryWrapper<T> myGe(SFunction<T, R> column, Object val) {
         return (BaseQueryWrapper<T>) super.ge(baseTableMap.getTableColumnSql(column), val);
     }
 
-    public <T, R> BaseQueryWrapper<T> lt(SFunction<T, R> column, Object val) {
+    public <T, R> BaseQueryWrapper<T> myLt(SFunction<T, R> column, Object val) {
         return (BaseQueryWrapper<T>) super.lt(baseTableMap.getTableColumnSql(column), val);
     }
 
-    public <T, R> BaseQueryWrapper<T> le(SFunction<T, R> column, Object val) {
+    public <T, R> BaseQueryWrapper<T> myLe(SFunction<T, R> column, Object val) {
         return (BaseQueryWrapper<T>) super.le(baseTableMap.getTableColumnSql(column), val);
     }
 
-    public <T, R> BaseQueryWrapper<T> in(SFunction<T, R> column, Object val) {
+    public <T, R> BaseQueryWrapper<T> myLn(SFunction<T, R> column, Object val) {
         return (BaseQueryWrapper<T>) super.in(baseTableMap.getTableColumnSql(column), val);
     }
 
-    public <T, R> BaseQueryWrapper<T> like(SFunction<T, R> column, Object val) {
+    public <T, R> BaseQueryWrapper<T> myLike(SFunction<T, R> column, Object val) {
         return (BaseQueryWrapper<T>) super.like(baseTableMap.getTableColumnSql(column), val);
     }
 
-    public <T, R> BaseQueryWrapper<T> likeRight(SFunction<T, R> column, Object val) {
+    public <T, R> BaseQueryWrapper<T> myLikeRight(SFunction<T, R> column, Object val) {
         return (BaseQueryWrapper<T>) super.likeRight(baseTableMap.getTableColumnSql(column), val);
     }
 
-    public <T, R> BaseQueryWrapper<T> likeRight(SFunction<T, R> column, Object val, Object val1) {
+    public <T, R> BaseQueryWrapper<T> myLikeRight(SFunction<T, R> column, Object val, Object val1) {
         return (BaseQueryWrapper<T>) super.between(baseTableMap.getTableColumnSql(column), val, val1);
     }
 
-    public <T, R> BaseQueryWrapper<T> notBetween(SFunction<T, R> column, Object val, Object val1) {
+    public <T, R> BaseQueryWrapper<T> myNotBetween(SFunction<T, R> column, Object val, Object val1) {
         return (BaseQueryWrapper<T>) super.notBetween(baseTableMap.getTableColumnSql(column), val, val1);
     }
 
-    public <T, R> BaseQueryWrapper<T> orderBy(SFunction<T, R> column, int by) {
+    public <T, R> BaseQueryWrapper<T> myOrderBy(SFunction<T, R> column, int by) {
         orderByDesc();
         return (BaseQueryWrapper<T>) this;
     }
@@ -87,7 +85,7 @@ public class BaseQueryWrapper<T> extends QueryWrapper<T> {
         getParamNameValuePairs().put("table", baseTableMap.getTable());
 
         Map<Class, Object>  map    = new HashMap<>();
-        Map<String, Object> result = mapper.getObj(this);
+        Map<String, Object> result = mapper.getObjs(this);
         if (result == null) {
             return null;
         }
@@ -100,7 +98,7 @@ public class BaseQueryWrapper<T> extends QueryWrapper<T> {
         getParamNameValuePairs().put("table", baseTableMap.getTable());
 
         List<Map<Class, Object>>  list   = new ArrayList<>();
-        List<Map<String, Object>> result = mapper.getObjList(this);
+        List<Map<String, Object>> result = mapper.getObjLists(this);
         if (result == null) {
             return null;
         }
@@ -115,25 +113,7 @@ public class BaseQueryWrapper<T> extends QueryWrapper<T> {
         return list;
     }
 
-    public Map<String, Object> runSqlMap() {
-        getRc();
-        getParamNameValuePairs().put("table", baseTableMap.getTable());
-        return mapper.getObj(this);
-    }
-
-    public List<Map<String, Object>> runSqlMapAll() {
-        getRc();
-        getParamNameValuePairs().put("table", baseTableMap.getTable());
-        return mapper.getObjList(this);
-    }
-
-    @Override
-    public QueryWrapper<T> select(Class<T> entityClass, Predicate<TableFieldInfo> predicate) {
-        return this;
-    }
-
-    @Override
-    public QueryWrapper<T> select(Predicate<TableFieldInfo> predicate) {
+    public QueryWrapper<T> mySelect(Predicate<TableFieldInfo> predicate) {
         return super.select(predicate);
     }
 
@@ -148,8 +128,7 @@ public class BaseQueryWrapper<T> extends QueryWrapper<T> {
         }
     }
 
-    @Override
-    public BaseQueryWrapper<T> select(String... columns) {
+    public BaseQueryWrapper<T> mySelect(String... columns) {
         for (int i = 0; i < columns.length; i++) {
             columns[i] = baseTableMap.getTableColumn(columns[i]);
         }
@@ -158,7 +137,7 @@ public class BaseQueryWrapper<T> extends QueryWrapper<T> {
     }
 
     @SafeVarargs
-    public final <T, R> BaseQueryWrapper<T> addNoColumn(SFunction<T, R>... fun) {
+    public final <T, R> BaseQueryWrapper<T> myAddNoColumn(SFunction<T, R>... fun) {
         for (SFunction<T, R> s : fun) {
             noColumn.add(baseTableMap.getTableColumn(baseTableMap.getTableColumnSql(s)));
         }
@@ -178,7 +157,7 @@ public class BaseQueryWrapper<T> extends QueryWrapper<T> {
         getParamNameValuePairs().put("cr", selectSql);
     }
 
-    public BaseQueryWrapper<T> limit(int count) {
+    public BaseQueryWrapper<T> myLimit(int count) {
         if (!getParamNameValuePairs().containsKey("by")) {
             getParamNameValuePairs().put("by", " limit " + count);
         } else {
@@ -187,10 +166,45 @@ public class BaseQueryWrapper<T> extends QueryWrapper<T> {
         return this;
     }
 
+    /**
+     * 更新
+     *
+     * @param m
+     */
     public void runUpdate(Map<Class, Object> m) {
         getParamNameValuePairs().put("table", baseTableMap.getTable());
         getParamNameValuePairs().put("cr", baseTableMap.getUpdateObj(m));
-        int result = mapper.getUpdateObj(this);
+        int result = mapper.updates(this);
         System.out.println(result);
+    }
+
+    /**
+     * 删除
+     */
+    public int runDelete() {
+        getParamNameValuePairs().put("table", baseTableMap.getTable());
+        return mapper.deletes(this);
+    }
+
+    /**
+     * 查询
+     *
+     * @return
+     */
+    public Map<String, Object> runSqlMap() {
+        getRc();
+        getParamNameValuePairs().put("table", baseTableMap.getTable());
+        return mapper.getObjs(this);
+    }
+
+    /**
+     * 查询
+     *
+     * @return
+     */
+    public List<Map<String, Object>> runSqlMapAll() {
+        getRc();
+        getParamNameValuePairs().put("table", baseTableMap.getTable());
+        return mapper.getObjLists(this);
     }
 }

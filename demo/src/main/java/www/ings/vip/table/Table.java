@@ -12,7 +12,5 @@ public class Table {
 
     private TestLabel testLabel;
 
-    static Table getInstance() {
-        return null;
-    }
+
 }

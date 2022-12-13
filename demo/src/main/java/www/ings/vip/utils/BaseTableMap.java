@@ -40,7 +40,7 @@ public class BaseTableMap extends HashMap<String, BaseTableInfo> {
     private void setTableColumn() {
         forEach((k, v) -> v.getSelectColumnMap().forEach((kk, vv) -> {
             tableColumn.put(v.getTableName() + "." + kk, vv);
-            tableMethod.put(v.getTableName() + "." + kk, TableClass.getMethodName(kk));
+            tableMethod.put(v.getTableName() + "." + kk, TableClassUtils.getMethodName(kk));
         }));
     }
 
