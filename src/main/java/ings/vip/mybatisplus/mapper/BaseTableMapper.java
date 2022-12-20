@@ -1,8 +1,8 @@
-package ings.vip.mybaitsplus.mapper;
+package ings.vip.mybatisplus.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Delete;
-import ings.vip.mybaitsplus.utils.BaseQueryWrapper;
+import ings.vip.mybatisplus.utils.BaseQueryWrapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;

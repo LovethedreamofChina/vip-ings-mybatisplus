@@ -1,8 +1,8 @@
-package ings.vip.mybaitsplus.config;
+package ings.vip.mybatisplus.config;
 
-import ings.vip.mybaitsplus.table.TestLabel;
-import ings.vip.mybaitsplus.table.TestTable;
-import ings.vip.mybaitsplus.utils.BaseTableMap;
+import ings.vip.mybatisplus.table.TestLabel;
+import ings.vip.mybatisplus.table.TestTable;
+import ings.vip.mybatisplus.utils.BaseTableMap;
 import lombok.Data;
 
 /**

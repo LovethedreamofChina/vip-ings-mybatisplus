@@ -1,11 +1,11 @@
-package ings.vip.mybaitsplus;
+package ings.vip.mybatisplus;
 
-import ings.vip.mybaitsplus.config.TablesMapper;
-import ings.vip.mybaitsplus.mapper.TableMapper;
-import ings.vip.mybaitsplus.utils.BaseQueryWrapper;
-import ings.vip.mybaitsplus.utils.BaseTableMap;
-import ings.vip.mybaitsplus.table.TestLabel;
-import ings.vip.mybaitsplus.table.TestTable;
+import ings.vip.mybatisplus.config.TablesMapper;
+import ings.vip.mybatisplus.mapper.TableMapper;
+import ings.vip.mybatisplus.utils.BaseQueryWrapper;
+import ings.vip.mybatisplus.utils.BaseTableMap;
+import ings.vip.mybatisplus.table.TestLabel;
+import ings.vip.mybatisplus.table.TestTable;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.util.ObjectUtils;

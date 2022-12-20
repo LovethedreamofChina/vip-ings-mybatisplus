@@ -1,4 +1,4 @@
-package ings.vip.mybaitsplus.utils;
+package ings.vip.mybatisplus.utils;
 
 import com.baomidou.mybatisplus.core.toolkit.LambdaUtils;
 import com.baomidou.mybatisplus.core.toolkit.support.SFunction;

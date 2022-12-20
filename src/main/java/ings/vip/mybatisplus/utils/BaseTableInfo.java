@@ -1,4 +1,4 @@
-package ings.vip.mybaitsplus.utils;
+package ings.vip.mybatisplus.utils;
 
 import com.baomidou.mybatisplus.core.metadata.TableFieldInfo;
 import com.baomidou.mybatisplus.core.metadata.TableInfo;

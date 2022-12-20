@@ -1,4 +1,4 @@
-package ings.vip.mybaitsplus.utils;
+package ings.vip.mybatisplus.utils;
 
 //
 // Source code recreated from a .class file by IntelliJ IDEA

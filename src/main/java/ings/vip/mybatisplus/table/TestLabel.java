@@ -1,4 +1,4 @@
-package ings.vip.mybaitsplus.table;
+package ings.vip.mybatisplus.table;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
