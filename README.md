@@ -15,7 +15,7 @@ gitee: [https://gitee.com/ijr/ings-vip-mybaitsplus](https://gitee.com/ijr/ings-v
 
     <dependency>
         <groupId>ings.vip</groupId>
-        <artifactId>mybaitsplus</artifactId>
+        <artifactId>mybatisplus</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </dependency>
 ```
