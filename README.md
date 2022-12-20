@@ -20,4 +20,4 @@ gitee: [https://gitee.com/ijr/ings-vip-mybaitsplus](https://gitee.com/ijr/ings-v
     </dependency>
 ```
 #### 使用说明
-test: https://gitee.com/ijr/ings-vip-mybaitsplus/blob/master/src/test/java/ings/vip/mybaitsplus/IngsApplicationTests.java
+test: [使用例子](https://gitee.com/ijr/ings-vip-mybaitsplus/blob/master/src/test/java/ings/vip/mybaitsplus/IngsApplicationTests.java)
