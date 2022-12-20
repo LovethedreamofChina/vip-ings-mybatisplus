@@ -6,10 +6,10 @@ import org.springframework.context.annotation.ComponentScan;
 
 @ComponentScan("ings.vip.mybaitsplus.*")
 @SpringBootApplication
-public class DemoApplication {
+public class IngsApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(DemoApplication.class, args);
+        SpringApplication.run(IngsApplication.class, args);
     }
 
 }

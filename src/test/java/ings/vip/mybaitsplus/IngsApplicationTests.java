@@ -1,5 +1,6 @@
 package ings.vip.mybaitsplus;
 
+import ings.vip.mybaitsplus.config.TablesMapper;
 import ings.vip.mybaitsplus.mapper.TableMapper;
 import ings.vip.mybaitsplus.utils.BaseQueryWrapper;
 import ings.vip.mybaitsplus.utils.BaseTableMap;
@@ -15,7 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 @SpringBootTest
-class DemoApplicationTests {
+class IngsApplicationTests {
 
     @Test
     void contextLoads() {

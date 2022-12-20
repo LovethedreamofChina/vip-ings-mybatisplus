@@ -1,6 +1,6 @@
 package ings.vip.mybaitsplus.mapper;
 
-import ings.vip.mybaitsplus.TablesMapper;
+import ings.vip.mybaitsplus.config.TablesMapper;
 import org.apache.ibatis.annotations.Mapper;
 
 /**

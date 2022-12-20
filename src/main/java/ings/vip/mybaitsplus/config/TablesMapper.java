@@ -1,4 +1,4 @@
-package ings.vip.mybaitsplus;
+package ings.vip.mybaitsplus.config;
 
 import ings.vip.mybaitsplus.table.TestLabel;
 import ings.vip.mybaitsplus.table.TestTable;
