@@ -2,7 +2,7 @@
 
 #### 介绍
 {**Mybaits-Plus 多表操作**
-gitee: [https://gitee.com/enterprises](https://gitee.com/enterprises)}
+gitee: [https://gitee.com/ijr/ings-vip-mybaitsplus](https://gitee.com/ijr/ings-vip-mybaitsplus)}
 
 #### 安装教程
 ```xml
