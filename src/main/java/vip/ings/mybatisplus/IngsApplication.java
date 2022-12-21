@@ -1,4 +1,4 @@
-package ings.vip.mybatisplus;
+package vip.ings.mybatisplus;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

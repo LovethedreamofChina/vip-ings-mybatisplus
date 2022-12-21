@@ -1,4 +1,4 @@
-package ings.vip.mybatisplus.utils;
+package vip.ings.mybatisplus.utils;
 
 /**
  * @author ljr
