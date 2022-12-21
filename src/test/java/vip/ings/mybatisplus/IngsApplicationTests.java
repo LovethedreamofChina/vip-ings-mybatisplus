@@ -2,8 +2,8 @@ package vip.ings.mybatisplus;
 
 import vip.ings.mybatisplus.config.TablesMapper;
 import vip.ings.mybatisplus.mapper.TableMapper;
-import vip.ings.mybatisplus.utils.BaseQueryWrapper;
-import vip.ings.mybatisplus.utils.BaseTableMap;
+import vip.ings.mybatisplus.base.BaseQueryWrapper;
+import vip.ings.mybatisplus.base.BaseTableMap;
 import vip.ings.mybatisplus.table.TestLabel;
 import vip.ings.mybatisplus.table.TestTable;
 import org.junit.jupiter.api.Test;

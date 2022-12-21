@@ -1,8 +1,11 @@
-package vip.ings.mybatisplus.utils;
+package vip.ings.mybatisplus.base;
 
 import com.baomidou.mybatisplus.core.toolkit.LambdaUtils;
 import com.baomidou.mybatisplus.core.toolkit.support.SFunction;
 import com.baomidou.mybatisplus.core.toolkit.support.SerializedLambda;
+import vip.ings.mybatisplus.utils.BaseTableInfo;
+import vip.ings.mybatisplus.utils.TableClassUtils;
+import vip.ings.mybatisplus.utils.TablesInfoHelper;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;

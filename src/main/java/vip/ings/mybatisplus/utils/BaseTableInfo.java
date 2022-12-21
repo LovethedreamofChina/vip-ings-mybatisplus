@@ -86,7 +86,7 @@ public class BaseTableInfo extends TableInfo {
         }
     }
 
-    String getTableColumn(String methodName) {
+    public String getTableColumn(String methodName) {
         List<TableFieldInfo> fieldList = getFieldList();
         StringBuilder        s         = new StringBuilder();
         fieldList.forEach(v -> {

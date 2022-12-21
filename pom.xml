@@ -7,6 +7,7 @@
     <version>1.0.0</version>
     <name>mybatisplus</name>
     <description>Mybatis-plus 多表操作</description>
+    <url>https://gitee.com/ijr/vip-ings-mybatisplus</url>
 
     <properties>
         <java.version>1.8</java.version>
@@ -26,50 +27,24 @@
         <developer>
             <name>LJR</name>
             <email>488313803@qq.com</email>
+            <organizationUrl>http://ings.vip/</organizationUrl>
             <organization>http://ings.vip/</organization>
+            <url>http://ings.vip/</url>
         </developer>
     </developers>
 
     <scm>
-        <connection>scm:git@github.com:ovethedreamofChina/ings-vip-mybatisplus.git</connection>
-        <developerConnection>scm:git@github.com:ovethedreamofChina/ings-vip-mybatisplus.git</developerConnection>
-        <url>git@github.com:ovethedreamofChina/ings-vip-mybatisplus.git</url>
+        <connection>scm:git@github.com:ovethedreamofChina/vip-ings-mybatisplus.git</connection>
+        <developerConnection>scm:git@github.com:ovethedreamofChina/vip-ings-mybatisplus.git</developerConnection>
+        <url>https://gitee.com/ijr/vip-ings-mybatisplus</url>
     </scm>
 
     <dependencies>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-            <scope>compile</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>compile</scope>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.junit.vintage</groupId>
-                    <artifactId>junit-vintage-engine</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-        </dependency>
-
         <!-- mybatis-plus -->
         <dependency>
             <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <artifactId>mybatis-plus</artifactId>
             <version>3.1.1</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
             <scope>compile</scope>
         </dependency>
     </dependencies>
@@ -84,19 +59,6 @@
             <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
         </repository>
     </distributionManagement>
-
-
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-dependencies</artifactId>
-                <version>${spring-boot.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
 
     <build>
         <plugins>

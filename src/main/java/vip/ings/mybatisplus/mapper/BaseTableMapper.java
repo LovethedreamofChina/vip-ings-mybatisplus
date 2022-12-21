@@ -2,7 +2,7 @@ package vip.ings.mybatisplus.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Delete;
-import vip.ings.mybatisplus.utils.BaseQueryWrapper;
+import vip.ings.mybatisplus.base.BaseQueryWrapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;

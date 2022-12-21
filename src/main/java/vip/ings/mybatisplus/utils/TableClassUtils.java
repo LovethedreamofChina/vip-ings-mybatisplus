@@ -11,7 +11,7 @@ public class TableClassUtils {
      * @param str
      * @return
      */
-    protected static String getMethodName(String str) {
+    public static String getMethodName(String str) {
         char[] cs = str.toCharArray();
         cs[0] -= 32;
         return String.valueOf(cs);

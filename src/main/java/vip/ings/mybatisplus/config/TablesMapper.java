@@ -2,7 +2,7 @@ package vip.ings.mybatisplus.config;
 
 import vip.ings.mybatisplus.table.TestLabel;
 import vip.ings.mybatisplus.table.TestTable;
-import vip.ings.mybatisplus.utils.BaseTableMap;
+import vip.ings.mybatisplus.base.BaseTableMap;
 import lombok.Data;
 
 /**

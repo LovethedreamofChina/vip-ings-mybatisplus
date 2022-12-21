@@ -1,4 +1,4 @@
-package vip.ings.mybatisplus.utils;
+package vip.ings.mybatisplus.base;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.TableFieldInfo;
