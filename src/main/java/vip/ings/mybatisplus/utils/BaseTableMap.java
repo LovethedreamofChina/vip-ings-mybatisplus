@@ -91,7 +91,7 @@ public class BaseTableMap extends HashMap<String, BaseTableInfo> {
                 if (v.getResultColumnMap().containsKey(key)) {
                     String m = v.getResultColumnMap().get(key);
                     if (!o.containsKey(v.table)) {
-                        Object t = v.table.newInstance();
+                        Object t = v.table.getDeclaredConstructor().newInstance();
                         o.put(v.table, t);
                     }
                     v.table.getMethod(m, v.getResultColumnType().get(key)).invoke(o.get(v.table), val);

@@ -19,7 +19,7 @@ import java.util.function.Predicate;
 public class BaseQueryWrapper<T> extends QueryWrapper<T> {
     private BaseTableMap    baseTableMap;
     private BaseTableMapper mapper;
-    private List<String>    noColumn = new LinkedList<>();
+    private List<String>    noColumn = new ArrayList<>();
 
     public <T, R> BaseQueryWrapper(BaseTableMapper mapper, SFunction<T, R> func) {
         this.mapper = mapper;
