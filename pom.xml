@@ -2,27 +2,18 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>ings.vip</groupId>
-    <artifactId>mybaitsplus</artifactId>
+    <groupId>vip.ings</groupId>
+    <artifactId>mybatisplus</artifactId>
     <version>1.0.0</version>
-    <name>mybaitsplus</name>
-    <description>Demo project for Spring Boot</description>
+    <name>mybatisplus</name>
+    <description>Mybatis-plus 多表操作</description>
 
     <properties>
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <spring-boot.version>2.3.7.RELEASE</spring-boot.version>
-        <!--插件版本-->
-        <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
-        <maven-release-plugin.version>3.0.0-M1</maven-release-plugin.version>
-        <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
-        <maven-javadoc-plugin.version>3.2.0</maven-javadoc-plugin.version>
-        <nexus-staging-maven-plugin.version>1.6.8</nexus-staging-maven-plugin.version>
-        <maven-gpg-plugin.version>1.6</maven-gpg-plugin.version>
-        <maven-deploy-plugin.version>3.0.0-M1</maven-deploy-plugin.version>
     </properties>
-
     <licenses>
         <license>
             <name>The Apache Software License, Version 2.0</name>
@@ -40,9 +31,9 @@
     </developers>
 
     <scm>
-        <connection>scm:git@github.com:ijr/ings-vip-mybatisplus.git</connection>
-        <developerConnection>scm:git@github.com:ijr/ings-vip-mybatisplus.git</developerConnection>
-        <url>git@github.com:ijr/ings-vip-mybatisplus.git</url>
+        <connection>scm:git@github.com:ovethedreamofChina/ings-vip-mybatisplus.git</connection>
+        <developerConnection>scm:git@github.com:ovethedreamofChina/ings-vip-mybatisplus.git</developerConnection>
+        <url>git@github.com:ovethedreamofChina/ings-vip-mybatisplus.git</url>
     </scm>
 
     <dependencies>
@@ -86,19 +77,16 @@
     </dependencies>
 
     <distributionManagement>
-<!--        <repository>-->
-<!--            <id>ings-vip</id>-->
-<!--            <url>file:${basedir}/repo</url>-->
-<!--        </repository>-->
         <snapshotRepository>
-            <id>ings-vip-mybatisplus-snapshots</id>
+            <id>sonatype</id>
             <url>https://s01.oss.sonatype.org/content/repositories/snapshots/</url>
         </snapshotRepository>
         <repository>
-            <id>ings-vip-mybatisplus-release</id>
+            <id>sonatype</id>
             <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
         </repository>
     </distributionManagement>
+
 
     <dependencyManagement>
         <dependencies>
@@ -117,22 +105,30 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version>
+                <version>3.0</version>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
                     <encoding>UTF-8</encoding>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
                 </configuration>
             </plugin>
-
-            <!-- Source -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.18.1</version>
+                <configuration>
+                    <skipTests>true</skipTests>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
-                <version>${maven-source-plugin.version}</version>
+                <version>2.2.1</version>
+                <configuration>
+                    <attach>true</attach>
+                </configuration>
                 <executions>
                     <execution>
-                        <id>attach-sources</id>
                         <phase>package</phase>
                         <goals>
                             <goal>jar-no-fork</goal>
@@ -140,42 +136,39 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-site-plugin</artifactId>
+                <version>3.7.1</version>
+            </plugin>
             <!-- Javadoc -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>${maven-javadoc-plugin.version}</version>
+                <version>3.0.1</version>
                 <configuration>
-                    <show>package</show>
-                    <tags>
-                        <tag>
-                            <name>date</name>
-                        </tag>
-                    </tags>
+                    <javadocExecutable>C:/Program Files/Java/jdk-11/bin/javadoc</javadocExecutable>
+                    <additionalJOptions>
+                        <additionalJOption>-Xdoclint:none</additionalJOption>
+                    </additionalJOptions>
                 </configuration>
                 <executions>
                     <execution>
-                        <id>attach-javadocs</id>
                         <phase>package</phase>
                         <goals>
                             <goal>jar</goal>
                         </goals>
-                        <configuration>
-                            <doclint>none</doclint>
-                        </configuration>
                     </execution>
                 </executions>
             </plugin>
-
             <!-- Gpg Signature -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-gpg-plugin</artifactId>
-                <version>${maven-gpg-plugin.version}</version>
+                <version>1.6</version>
                 <executions>
                     <execution>
-                        <!-- id 与 setting.xml 的 gpg 配置中的 id 对应-->
-                        <id>ossrh</id>
+                        <id>sign-artifacts</id>
                         <phase>verify</phase>
                         <goals>
                             <goal>sign</goal>
