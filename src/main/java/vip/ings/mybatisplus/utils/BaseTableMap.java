@@ -21,7 +21,7 @@ public class BaseTableMap extends HashMap<String, BaseTableInfo> {
         super();
         int i = 0;
         for (Class c : classes) {
-            BaseTableInfo t = TableInfoHelper.initTableInfo(null, c);
+            BaseTableInfo t = TablesInfoHelper.initTableInfo(null, c);
             t.table = c;
             put(c.getSimpleName(), t);
             i++;

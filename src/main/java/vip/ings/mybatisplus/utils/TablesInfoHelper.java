@@ -26,12 +26,12 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
-public class TableInfoHelper {
+public class TablesInfoHelper {
     private static final Log                      logger           = LogFactory.getLog(com.baomidou.mybatisplus.core.toolkit.TableInfoHelper.class);
     private static final Map<Class<?>, TableInfo> TABLE_INFO_CACHE = new ConcurrentHashMap();
     private static final String                   DEFAULT_ID_NAME  = "id";
 
-    public TableInfoHelper() {
+    public TablesInfoHelper() {
     }
 
     public static TableInfo getTableInfo(Class<?> clazz) {
