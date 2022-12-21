@@ -5,10 +5,7 @@ import com.baomidou.mybatisplus.core.toolkit.support.SFunction;
 import com.baomidou.mybatisplus.core.toolkit.support.SerializedLambda;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author ljr
@@ -57,6 +54,9 @@ public class BaseTableMap extends HashMap<String, BaseTableInfo> {
         StringBuilder s = new StringBuilder();
         forEach((k, v) -> {
             BaseTableInfo t = get(k);
+            if (t == null) {
+                throw new RuntimeException("error=>" + v + "键值为空");
+            }
             i[0]++;
             s.append(t.getAllSqlSelect());
             if (i[0] != size()) {
@@ -70,12 +70,18 @@ public class BaseTableMap extends HashMap<String, BaseTableInfo> {
     public <T, R> void addNoColumn(SFunction<T, R> func) {
         SerializedLambda s    = LambdaUtils.resolve(func);
         BaseTableInfo    info = get(s.getImplClass().getSimpleName());
+        if (info == null) {
+            throw new RuntimeException("error=>" + s.getImplClass().getSimpleName() + "键值为空");
+        }
         info.addNoField(s.getImplMethodName().toLowerCase());
     }
 
     <T, R> String getTableColumnSql(SFunction<T, R> func) {
         SerializedLambda s    = LambdaUtils.resolve(func);
         BaseTableInfo    info = get(s.getImplClass().getSimpleName());
+        if (info == null) {
+            throw new RuntimeException("error=>" + s.getImplMethodName() + "键值为空");
+        }
         return info.getTableColumn(s.getImplMethodName());
     }
 
@@ -98,7 +104,7 @@ public class BaseTableMap extends HashMap<String, BaseTableInfo> {
     }
 
     String getUpdateObj(Map<Class, Object> m) {
-        List<String> s = new LinkedList<>();
+        List<String> s = new ArrayList<>();
         forEach((k, v) -> v.getFieldList().forEach(vv -> {
             try {
                 Object val = m.get(v.table).getClass().getMethod("get" + tableMethod.get(v.getTableName() + "." + vv.getColumn())).invoke(m.get(v.table));
